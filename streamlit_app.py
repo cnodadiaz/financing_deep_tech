@@ -5,13 +5,13 @@ from io import BytesIO
 import pandas as pd
 import altair as alt
 import streamlit.components.v1 as components
-import umami
+#import umami
 
 st.set_page_config(page_title="Capital Raising Toolkit", page_icon="logo.png", layout="centered", initial_sidebar_state="expanded", menu_items=None)
 
-umami.set_url_base("https://umami.gregotsch.com")
-umami.set_website_id('cbca9cc7-e956-4df9-b92c-591973e74e26')
-umami.set_hostname('convertiblenotecalculator.gregotsch.com')
+#umami.set_url_base("https://umami.gregotsch.com")
+#umami.set_website_id('cbca9cc7-e956-4df9-b92c-591973e74e26')
+#umami.set_hostname('convertiblenotecalculator.gregotsch.com')
 
 
 # log page view
@@ -132,14 +132,14 @@ logdata = {
     },
     "results": results
 }
-
+'''
 event_resp = umami.new_event(
     event_name='Calculation-Data',
     title='Calculation-Data', # Defaults to event_name if omitted.
     url='/',
     custom_data=logdata,
     referrer='https://convertiblenotecalculator.gregotsch.com')
-
+'''
 # st.write('Value of the convertible note after interest:')
 # st.subheader(f"USD {round(results['convertible_note_value'],2):.2f}")
 st.write('Equity ownership for investors after conversion:')
