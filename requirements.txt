@@ -3,5 +3,4 @@ pandas
 streamlit
 pulp
 vega_datasets
-bs4
-umami-analytics
+beautifulsoup4
