@@ -132,14 +132,15 @@ logdata = {
     },
     "results": results
 }
-'''
-event_resp = umami.new_event(
-    event_name='Calculation-Data',
-    title='Calculation-Data', # Defaults to event_name if omitted.
-    url='/',
-    custom_data=logdata,
-    referrer='https://convertiblenotecalculator.gregotsch.com')
-'''
+
+
+#event_resp = umami.new_event(
+#    event_name='Calculation-Data',
+#    title='Calculation-Data', # Defaults to event_name if omitted.
+#    url='/',
+#    custom_data=logdata,
+#    referrer='https://convertiblenotecalculator.gregotsch.com')
+
 # st.write('Value of the convertible note after interest:')
 # st.subheader(f"USD {round(results['convertible_note_value'],2):.2f}")
 st.write('Equity ownership for investors after conversion:')
