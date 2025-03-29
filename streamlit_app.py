@@ -173,11 +173,13 @@ data = pd.DataFrame([
 
 
 chart = alt.Chart(data).mark_bar().encode(
-        x=alt.X('type', axis=alt.Axis(title='', labelAngle=0), sort=['Initial Investment', 'DevelopmentofInvestment']),
-        y=alt.Y('value', axis=alt.Axis(title='Amount ($)')),
-        color=alt.Color('name',legend=alt.Legend(title="Legend") ,scale=alt.Scale(range=['gold', 'lightgreen', 'lightblue', 'orange'])),
-        order=alt.Order("order", sort='ascending'),
-    )
+    x=alt.X('type', axis=alt.Axis(title='', labelAngle=0), sort=['Pre-round gains']),
+    y=alt.Y('value', axis=alt.Axis(title='Amount ($)')),
+    color=alt.Color('name', legend=alt.Legend(title="Legend"),
+                    scale=alt.Scale(range=['gold', 'lightgreen', 'lightblue', 'orange'])),
+    order=alt.Order("order", sort='ascending'),
+)
+
 
 st.write('Pre-round gains')
 st.altair_chart(chart, theme="streamlit", use_container_width=True)
