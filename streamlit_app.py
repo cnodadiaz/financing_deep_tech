@@ -113,10 +113,18 @@ discount_rate = st.sidebar.number_input('Discount for early investors upon conve
 results = calculate_valuation(raise_amount, alimit, interest, time_months, next_round_capital, equity_trade_next_round, discount_rate)
 
 
-interest = round(results['convertible_note_value'] - raise_amount,2)
-pre_to_post_money_gain = (results['pre_money_valuation'] * results['equity_ownership_investors']) - raise_amount - interest
-discount = (results['post_money_valuation'] * results['equity_ownership_investors']) - pre_to_post_money_gain - raise_amount - interest
-growth = discount + pre_to_post_money_gain + interest
+investment_value_after = results['equity_ownership_investors'] * results['post_money_valuation']
+interest_accrued = results['convertible_note_value'] - raise_amount
+discount_gain = investment_value_after - results['convertible_note_value']
+total_growth = investment_value_after - raise_amount
+valuation_gain = total_growth - interest_accrued - discount_gain
+
+# Round for presentation
+interest = round(interest_accrued, 2)
+discount = round(discount_gain, 2)
+pre_to_post_money_gain = round(valuation_gain, 2)
+growth = round(total_growth, 2)
+
 
 
 logdata = {
@@ -156,13 +164,13 @@ with col_left:
 with col_right:
     st.subheader(f"{round((growth / (raise_amount/100)),2):.2f}%")
 
-data = pd.DataFrame(columns=['type', 'name', 'value', 'order'])
+data = pd.DataFrame([
+    ["Pre-round gains", "Investment", raise_amount, 0],
+    ["Pre-round gains", "Interest", interest, 1],
+    ["Pre-round gains", "Discount", discount, 2],
+    ["Pre-round gains", "Valuation Gains", pre_to_post_money_gain, 3]
+], columns=['type', 'name', 'value', 'order'])
 
-# data.loc[0] = ["Initial Investment", "Investment", raise_amount, 0]
-data.loc[1] = ["Pre-round gains", "Investment", raise_amount, 0]
-data.loc[2] = ["Pre-round gains", "Interest", interest, 1]
-data.loc[3] = ["Pre-round gains", "Discount", discount, 2]
-data.loc[4] = ["Pre-round gains", "Valuation Gains", pre_to_post_money_gain, 3]
 
 chart = alt.Chart(data).mark_bar().encode(
         x=alt.X('type', axis=alt.Axis(title='', labelAngle=0), sort=['Initial Investment', 'DevelopmentofInvestment']),
